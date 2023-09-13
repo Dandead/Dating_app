@@ -9,6 +9,6 @@ env/
 .env/
 
 **/__pycache__/
-.env
+*.env
 *.zip
 *.sqlite3
