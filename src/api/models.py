@@ -9,8 +9,8 @@ import uuid
 
 def user_media_path(instance, filename) -> str:
 	"""Create user's media path based on email hash"""
-	folder :str = f'user_{sha256(str(instance.email).encode("utf-8"))}'
-	hashed_filename :str = f'{uuid.uuid4}.{str(filename).split(".")[-1]}'
+	folder :str = f'user_{sha256(str(instance.email).encode("utf-8")).hexdigest()}'
+	hashed_filename :str = f'{uuid.uuid4()}.{str(filename).split(".")[-1]}'
 	return f'{folder}/{hashed_filename}'
 
 # class DatingUser(AbstractBaseUser):
