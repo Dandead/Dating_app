@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import DatingUser
+
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
@@ -18,9 +20,10 @@ class CustomUserAdmin(UserAdmin):
             "fields": (
                 "email", "password1", "password2", "image", "is_staff",
                 "is_active", "groups", "user_permissions"
-            )}
-        ),
+            )}),
     )
     search_fields = ("email",)
     ordering = ("email",)
+
+
 admin.site.register(DatingUser, CustomUserAdmin)

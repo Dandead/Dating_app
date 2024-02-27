@@ -1,20 +1,11 @@
-from hashlib import sha256
-import uuid
-
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
 
 from .managers import CustomUserManager
+from .utils import add_watermark_to_image, user_media_path
 
 
-def user_media_path(instance, filename) -> str:
-    """Create user's media path based on email hash"""
-    folder :str = f'user_{sha256(str(instance.email).encode("utf-8")).hexdigest()}'
-    hashed_filename :str = f'{uuid.uuid4()}.{str(filename).rsplit(".")[-1]}'
-    return f'{folder}/{hashed_filename}'
-
-# class DatingUser(AbstractBaseUser):
 class DatingUser(AbstractBaseUser, PermissionsMixin):
     """Overring basic user model for DatingApp"""
     email = models.EmailField('Email', unique=True)
@@ -31,7 +22,7 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
     )
     gender = models.CharField('Gender', max_length=1, choices=GENDER_CHOICES)
     image = models.ImageField(upload_to=user_media_path, null=True)
-    
+
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
@@ -39,4 +30,9 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
 
     def __repr__(self):
         return str(self.email)
-    
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image:
+            image_to_update = self.image.path
+            add_watermark_to_image(image_to_update)
