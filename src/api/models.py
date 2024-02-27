@@ -26,7 +26,7 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ["first_name", "gender"]
+    REQUIRED_FIELDS = ["first_name"]
 
     def __repr__(self):
         return str(self.email)
@@ -36,3 +36,9 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
         if self.image:
             image_to_update = self.image.path
             add_watermark_to_image(image_to_update)
+
+
+class Match(PermissionsMixin):
+    """Match model"""
+    sender = models.ForeignKey(DatingUser, on_delete=models.CASCADE)
+    retriever = models.ForeignKey(DatingUser, on_delete=models.DO_NOTHING)
