@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.views import DatingAPICreate, DatingAPIlist
+from api.views import DatingUserCreateAPI, DatingUserListAPI, DatingMatchCreateAPI
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/clients', DatingAPIlist.as_view()),
-    path('api/clients/create', DatingAPICreate.as_view()),
+    path('api/clients', DatingUserListAPI.as_view()),
+    path('api/clients/create', DatingUserCreateAPI.as_view()),
+    path('api/clients/<int:id>/match', DatingMatchCreateAPI.as_view())
 ]
 
-
-#urlpatterns += router.urls
+# urlpatterns += router.urls

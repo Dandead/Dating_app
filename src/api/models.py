@@ -1,9 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
-
 from .managers import CustomUserManager
-from .utils import add_watermark_to_image, user_media_path
+from .services import add_watermark_to_image, user_media_path
 
 
 class DatingUser(AbstractBaseUser, PermissionsMixin):
@@ -33,12 +32,25 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        # add watermark to user uploaded photos
         if self.image:
             image_to_update = self.image.path
             add_watermark_to_image(image_to_update)
 
 
-class Match(PermissionsMixin):
+class Match(models.Model):
     """Match model"""
-    sender = models.ForeignKey(DatingUser, on_delete=models.CASCADE)
-    retriever = models.ForeignKey(DatingUser, on_delete=models.DO_NOTHING)
+    sender = models.ForeignKey(
+        DatingUser,
+        on_delete=models.CASCADE,
+        related_name="likes"
+    )
+    retriever = models.ForeignKey(
+        DatingUser,
+        on_delete=models.CASCADE,
+        related_name="is_liked"
+    )
+    time = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ("sender", "retriever")

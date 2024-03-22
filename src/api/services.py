@@ -1,5 +1,3 @@
-"""Business logic tilities"""
-
 from hashlib import sha256
 import uuid
 from PIL import Image, ImageDraw, ImageFont
@@ -26,3 +24,4 @@ def user_media_path(instance, filename) -> str:
     folder: str = f'user_{sha256(str(instance.email).encode("utf-8")).hexdigest()}'
     hashed_filename: str = f'{uuid.uuid4()}.{str(filename).rsplit(".")[-1]}'
     return f'{folder}/{hashed_filename}'
+
