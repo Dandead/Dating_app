@@ -23,7 +23,7 @@ jobs:
     - name: Check code formating by Black
       working-directory: src
       run: |
-        python -m black .
+        python -m black . --check
     
     - name: Lint code by flake8
       working-directory: src
