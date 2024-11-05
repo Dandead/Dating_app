@@ -1,4 +1,4 @@
-name: Lint, typechecking and tests`
+name: Lint, typechecking and tests
 
 on: [push, pull_request]
 
