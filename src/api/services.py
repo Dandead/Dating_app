@@ -14,14 +14,16 @@ def add_watermark_to_image(image_path):
         font_size = y
     else:
         font_size = x
-    font = ImageFont.load_default(int(font_size/6))
+    font = ImageFont.load_default(int(font_size / 6))
     draw.text((x, y), myword, (255, 255, 255), font=font)
     photo.save(image_path)
 
 
 def user_media_path(instance, filename) -> str:
-    """Return user's media path with hashed filename based on hashed email and uuid4 random hash"""
+    """
+    Return user's media path with hashed filename based on
+    hashed email and uuid4 random hash
+    """
     folder: str = f'user_{sha256(str(instance.email).encode("utf-8")).hexdigest()}'
     hashed_filename: str = f'{uuid.uuid4()}.{str(filename).rsplit(".")[-1]}'
-    return f'{folder}/{hashed_filename}'
-
+    return f"{folder}/{hashed_filename}"
