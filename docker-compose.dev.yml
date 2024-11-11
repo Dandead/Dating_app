@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      dockerfile: Dockerfile.dev
+    env_file:
+      - ./src/.env.dev
+
+  pgdb:
+    env_file:
+      - ./src/db.env.dev

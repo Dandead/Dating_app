@@ -1,10 +1,15 @@
 services:
   web:
-    build: ./src
+    build:
+      context: ./src
+      dockerfile: Dockerfile
     container_name: django
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py migrate &&
+                      python manage.py collectstatic --noinput &&
+                      gunicorn --bind 0.0.0.0:8000 config.wsgi:application"
     volumes:
       - ./src/:/usr/src/app
+      - static_volume:/usr/src/app/static # separate static files with project volume
     ports:
       - 8001:8000
     env_file:
@@ -13,7 +18,7 @@ services:
       pgdb:
         condition: service_healthy
         restart: true
-        
+
 
   pgdb:
     image: postgres:17.0-bookworm
@@ -33,3 +38,4 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:
