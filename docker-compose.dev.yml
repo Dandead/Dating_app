@@ -1,10 +1,12 @@
 services:
   web:
     build:
+      context: ./src
       dockerfile: Dockerfile.dev
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     env_file:
-      - ./src/.env.dev
+      - ./src/.dev.env
 
   pgdb:
     env_file:
-      - ./src/db.env.dev
+      - ./src/db.dev.env
