@@ -1,20 +1,19 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import DatingUser
+from users.models import DatingUser
+from profiles.models import DatingProfile
+
+
+class DatingProfileInline(admin.StackedInline):
+    model = DatingProfile
+    can_delete = False
+    verbose_name_plural = "Profile"
 
 
 class CustomUserAdmin(UserAdmin):
-    add_form = CustomUserCreationForm
-    # inlines = [MatchInlineIsLiked, MatchInlineLikes]
-    form = CustomUserChangeForm
-    model = DatingUser
-    list_display = (
-        "email",
-        "gender",
-        "is_staff",
-        "is_active",
-    )
+    inlines = (DatingProfileInline,)
+    # model = DatingUser
+    list_display = ("email", "is_staff", "is_active", "is_superuser")
     list_filter = (
         "email",
         "is_staff",
@@ -22,10 +21,6 @@ class CustomUserAdmin(UserAdmin):
     )
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (
-            "Personal info",
-            {"fields": ("first_name", "last_name", "gender", "birthday", "avatar")},
-        ),
         (
             "Permissions",
             {
@@ -48,7 +43,6 @@ class CustomUserAdmin(UserAdmin):
                     "email",
                     "password1",
                     "password2",
-                    "avatar",
                     "is_staff",
                     "is_active",
                     # "groups", "user_permissions"
@@ -61,3 +55,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(DatingUser, CustomUserAdmin)
+# admin.site.register(DatingProfile)

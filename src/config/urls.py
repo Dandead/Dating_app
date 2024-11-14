@@ -16,21 +16,24 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
-from api.views import UserRegistrationView, UserDetailsUpdateDeleteView
-from api.views import UserListView
+from django.urls import path
+
+# from api.views import UserRegistrationView, UserDetailsUpdateDeleteView
+# from api.views import UserListView
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api-auth/", include("rest_framework.urls")),
-    path("api/users/", UserListView.as_view(), name="user-list-create"),
-    path(
-        "api/users/<int:pk>/",
-        UserDetailsUpdateDeleteView.as_view(),
-        name="user-detail-update-delete",
-    ),
-    path("api/users/register/", UserRegistrationView.as_view(), name="user-register"),
 ]
 
+"""
+path("api-auth/", include("rest_framework.urls")),
+path("api/users/", UserListView.as_view(), name="user-list-create"),
+path(
+    "api/users/<int:pk>/",
+    UserDetailsUpdateDeleteView.as_view(),
+    name="user-detail-update-delete",
+),
+path("api/users/register/", UserRegistrationView.as_view(), name="user-register"),
+"""
 # urlpatterns += router.urls
