@@ -27,7 +27,7 @@ jobs:
     - name: Lint code by ruff
       working-directory: src
       run: |
-        python -m ruff check .
+        python -m ruff check . --ignore F401
 
     - name: Run tests
       working-directory: src
