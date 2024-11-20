@@ -8,10 +8,7 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
     """Overring basic user model for DatingApp"""
 
     email = models.EmailField("Email", unique=True)
-    nickname = models.CharField(
-        "Nickname", max_length=20, unique=True, null=True, blank=True
-    )
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -24,3 +21,10 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
 
     def __repr__(self):
         return str(self.email)
+
+
+class DatingUserNickname(models.Model):
+    """Model provides user's unique nickname"""
+
+    user = models.OneToOneField(DatingUser, on_delete=models.CASCADE)
+    nickname = models.CharField("Nickname", max_length=20, unique=True)
