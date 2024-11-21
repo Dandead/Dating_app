@@ -54,6 +54,7 @@ class TestDatingUserNicknameModel(TestCase):
         self.nickname = DatingUserNickname.objects.create(
             user=self.user_instance, nickname="test"
         )
+        self.assertEqual(self.user.objects.count(), 1)
         self.assertEqual(self.user_instance.nick.nickname, "test")
         self.assertEqual(self.nickname.nickname, "test")
         self.assertEqual(self.user_instance, self.nickname.user)

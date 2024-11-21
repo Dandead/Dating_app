@@ -9,7 +9,7 @@ class DatingProfile(models.Model):
     )
     first_name = models.CharField("First name", max_length=150)
     last_name = models.CharField("Last name", max_length=150)
-    birthday = models.DateField("Birthday", blank=True, null=True)
+    birthday = models.DateField("Birthday", null=True)
     GENDER_CHOICES = (
         ("M", "Male"),
         ("F", "Female"),
@@ -17,6 +17,9 @@ class DatingProfile(models.Model):
     gender = models.CharField("Gender", max_length=1, choices=GENDER_CHOICES)
 
     def __repr__(self):
+        return f"{self.user.email}'s profile"
+
+    def __str__(self):
         return f"{self.user.email}'s profile"
 
 

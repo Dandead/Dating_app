@@ -22,6 +22,9 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
     def __repr__(self):
         return str(self.email)
 
+    def __str__(self):
+        return str(self.email)
+
 
 class DatingUserNickname(models.Model):
     """Model provides user's unique nickname"""
