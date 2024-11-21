@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import related, related_descriptors
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from users.managers import CustomUserManager
@@ -26,5 +27,10 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
 class DatingUserNickname(models.Model):
     """Model provides user's unique nickname"""
 
-    user = models.OneToOneField(DatingUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        DatingUser, on_delete=models.CASCADE, related_name="nick"
+    )
     nickname = models.CharField("Nickname", max_length=20, unique=True)
+
+    def __repr__(self):
+        return str(self.nickname)
