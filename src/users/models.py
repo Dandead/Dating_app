@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.fields import related, related_descriptors
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from users.managers import CustomUserManager
