@@ -13,3 +13,4 @@ env/
 *.zip
 *.sqlite3
 **/media/
+**/static/
