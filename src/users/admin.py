@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from users.models import DatingUser
+from users.models import DatingUser, DatingUserNickname
 from profiles.models import DatingProfile
 
 
@@ -10,8 +10,14 @@ class DatingProfileInline(admin.StackedInline):
     verbose_name_plural = "Profile"
 
 
+class DatingUserNicknameInline(admin.StackedInline):
+    model = DatingUserNickname
+    can_delete = False
+    verbose_name_plural = "Nickname"
+
+
 class CustomUserAdmin(UserAdmin):
-    inlines = (DatingProfileInline,)
+    inlines = (DatingProfileInline, DatingUserNicknameInline)
     # model = DatingUser
     list_display = ("email", "is_staff", "is_active", "is_superuser")
     list_filter = (
@@ -54,5 +60,14 @@ class CustomUserAdmin(UserAdmin):
     ordering = ("email",)
 
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ("user", "first_name", "last_name", "birthday", "gender")
+    list_filter = (
+        "user",
+        "birthday",
+        "gender",
+    )
+
+
 admin.site.register(DatingUser, CustomUserAdmin)
-# admin.site.register(DatingProfile)
+admin.site.register(DatingProfile, ProfileAdmin)
