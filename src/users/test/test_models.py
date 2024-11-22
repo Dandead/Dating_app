@@ -14,7 +14,7 @@ class TestDatingUserModel(TestCase):
         )
         self.assertEqual(self.user_instance.email, "test@test.com")
         self.assertEqual(self.user.objects.count(), 1)
-        self.assertFalse(self.user_instance.is_active)
+        self.assertTrue(self.user_instance.is_active)
         self.assertFalse(self.user_instance.is_staff)
         self.assertFalse(self.user_instance.is_superuser)
         self.assertEqual(str(self.user_instance), self.user_instance.email)
