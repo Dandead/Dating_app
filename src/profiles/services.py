@@ -25,7 +25,7 @@ def user_media_path(instance, filename) -> str:
     hashed email and uuid4 random hash
     """
     hashed_folder: str = (
-        f'user_{sha256(str(instance.email).encode("utf-8")).hexdigest()}'
+        f'user_{sha256(str(instance.profile.user.email).encode("utf-8")).hexdigest()}'
     )
     hashed_filename: str = f'{uuid.uuid4()}.{str(filename).rsplit(".")[-1]}'
     return f"{hashed_folder}/{hashed_filename}"
