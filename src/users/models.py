@@ -8,9 +8,9 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
     """Overring basic user model for DatingApp"""
 
     email = models.EmailField("Email", unique=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)  # type: ignore
+    is_staff = models.BooleanField(default=False)  # type: ignore
+    is_superuser = models.BooleanField(default=False)  # type: ignore
     date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = "email"
@@ -18,6 +18,11 @@ class DatingUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+    class Meta:  # type: ignore
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+        ordering = ("-date_joined", "is_active")
 
     def __repr__(self):
         return str(self.email)
@@ -33,6 +38,8 @@ class DatingUserNickname(models.Model):
         DatingUser, on_delete=models.CASCADE, related_name="nick"
     )
     nickname = models.CharField("Nickname", max_length=20, unique=True)
+
+    objects = models.Manager()
 
     def __repr__(self):
         return str(self.nickname)

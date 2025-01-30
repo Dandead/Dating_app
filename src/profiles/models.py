@@ -16,11 +16,13 @@ class DatingProfile(models.Model):
     )
     gender = models.CharField("Gender", max_length=1, choices=GENDER_CHOICES)
 
+    objects = models.Manager()
+
     def __repr__(self):
-        return f"{self.user.email}'s profile"
+        return f"{self.user.email}'s profile"  # type: ignore
 
     def __str__(self):
-        return f"{self.user.email}'s profile"
+        return f"{self.user.email}'s profile"  # type: ignore
 
 
 class ProfilePicture(models.Model):
@@ -33,5 +35,5 @@ class ProfilePicture(models.Model):
         super().save(*args, **kwargs)
         # add watermark to user uploaded photos after saving db instance
         if self.avatar:
-            image_to_update = self.avatar.path
+            image_to_update = self.avatar.path  # type: ignore
             add_watermark_to_image(image_to_update)

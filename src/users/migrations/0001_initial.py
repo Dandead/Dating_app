@@ -40,9 +40,9 @@ class Migration(migrations.Migration):
                         max_length=254, unique=True, verbose_name="Email"
                     ),
                 ),
-                ("is_active", models.BooleanField(default=True)),
-                ("is_staff", models.BooleanField(default=False)),
-                ("is_superuser", models.BooleanField(default=False)),
+                ("is_active", models.BooleanField(default=True)),  # type: ignore
+                ("is_staff", models.BooleanField(default=False)),  # type: ignore
+                ("is_superuser", models.BooleanField(default=False)),  # type: ignore
                 (
                     "date_joined",
                     models.DateTimeField(default=django.utils.timezone.now),

@@ -16,12 +16,12 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         if not settings.DEBUG:
             self.stdout.write(
-                self.style.ERROR("Cannot create test users in production.")
+                self.style.ERROR("Cannot create test users in production.")  # type: ignore
             )
             return
 
         total = kwargs["total"]
         DatingUserFactory.create_batch(total)
         self.stdout.write(
-            self.style.SUCCESS(f"Successfully created {total} test users.")
+            self.style.SUCCESS(f"Successfully created {total} test users.")  # type: ignore
         )

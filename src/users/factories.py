@@ -9,7 +9,7 @@ DatingUser = get_user_model()
 class DatingUserFactory(factory.django.DjangoModelFactory):
     """Factory for creating DatingUser instances."""
 
-    class Meta:
+    class Meta:  # type: ignore
         model = DatingUser
         django_get_or_create = ("email",)
 
@@ -21,7 +21,7 @@ class DatingUserFactory(factory.django.DjangoModelFactory):
 
 
 class NicknameFactory(factory.django.DjangoModelFactory):
-    class Meta:
+    class Meta:  # type: ignore
         model = DatingUserNickname
         django_get_or_create = ("nickname",)
 

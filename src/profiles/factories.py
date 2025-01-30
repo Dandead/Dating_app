@@ -3,7 +3,7 @@ from profiles.models import DatingProfile, ProfilePicture
 
 
 class DatingProfileFactory(factory.django.DjangoModelFactory):
-    class Meta:
+    class Meta:  # type: ignore
         model = DatingProfile
 
     user = factory.SubFactory("users.factories.DatingUserFactory", profile=None)
@@ -20,7 +20,7 @@ class DatingProfileFactory(factory.django.DjangoModelFactory):
 
 
 class DatingProfilePictureFactory(factory.django.DjangoModelFactory):
-    class Meta:
+    class Meta:  # type: ignore
         model = ProfilePicture
 
     profile = factory.SubFactory("profiles.factories.DatingProfileFactory", avatar=None)
