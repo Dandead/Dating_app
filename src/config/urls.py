@@ -17,20 +17,21 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from api.views import UserListView, UserDetailsUpdateDeleteView
+
+# from api.views import UserListView, UserDetailsUpdateDeleteView
 
 # from api.views import UserRegistrationView,
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api-auth/", include("rest_framework.urls")),
-    path("api/users/", UserListView.as_view(), name="user-list-create"),
-    path(
-        "api/users/<int:pk>/",
-        UserDetailsUpdateDeleteView.as_view(),
-        name="user-detail-update-delete",
-    ),
+    # path("api-auth/", include("rest_framework.urls")),
+    # path("api/users/", UserListView.as_view(), name="user-list-create"),
+    # path(
+    #     "api/users/<int:pk>/",
+    #     UserDetailsUpdateDeleteView.as_view(),
+    #     name="user-detail-update-delete",
+    # ),
 ]
 
 """
