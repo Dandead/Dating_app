@@ -2,6 +2,10 @@ name: Lint, typechecking and tests
 
 on: [push, pull_request]
 
+env:
+  DJANGO_DEBUG: False
+  DJANGO_SECRET_KEY: $rl^v^#ffnqa@h!!y=s7w=lq+7=*)tsg6bccladrhc=f#ghj*%
+
 jobs: 
   build:
     runs-on: ubuntu-latest
