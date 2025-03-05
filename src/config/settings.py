@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "users",
-    "profiles",
 ]
 
 MIDDLEWARE = [
@@ -116,7 +115,7 @@ TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 

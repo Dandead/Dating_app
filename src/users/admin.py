@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from users.models import DatingUser, DatingUserNickname
-from profiles.models import DatingProfile
+from users.models import DatingUser, DatingUserNickname, DatingProfile
 
 
 class DatingProfileInline(admin.StackedInline):
